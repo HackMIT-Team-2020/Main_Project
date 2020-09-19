@@ -51,6 +51,7 @@ $(document).ready(function () {
         $("#ctcancel").hide();
         if ($('#ctinput').val().length != 0) {
             $("#title").text($('#ctinput').val());
+            saveNotes()
         }
         $("#title").show();
         $("#changetitle").show();
@@ -66,24 +67,7 @@ $(document).ready(function () {
 
 
     $("#saveimg").click(function () {
-        axios.post('/addnote', {
-                data: {
-                    title: $("#title").text(),
-                    stroke_data: sketchpad.toObject(),
-                    image: $("#sketchpad")[0].toDataURL(),
-                    id: id
-                }
-            })
-            .then(function (response) {
-                if (id.length == 0) {
-                    id = response.data
-                }
-                console.log(response)
-                console.log(id)
-            })
-            .catch(function (response) {
-                console.log('error');
-            });
+        saveNotes()
     })
 
     $("#parseText").click(function () {
@@ -92,40 +76,54 @@ $(document).ready(function () {
         $("#vinput").hide();
         $("#vsave").hide();
 
-        axios.post('/addnote', {
-                data: {
-                    title: $("#title").text(),
-                    stroke_data: sketchpad.toObject(),
-                    image: $("#sketchpad")[0].toDataURL(),
-                    id: id
-                }
-            })
-            .then(function (response) {
-                console.log(response)
-                if (id.length == 0)
-                    id = response.data
-                axios.get('/parseNote/' + id).then(function (response) {
-                    console.log("Is this correct")
-                    console.log(response.data)
-                    $("#loader").hide();
-                    $("#vinput").show();
-                    $("#vinput").val(response.data);
-                    $("#vsave").show();
+        saveNotes(function (response) {
+          console.log(response)
+          if (id.length == 0)
+              id = response.data
+          axios.get('/parseNote/' + id).then(function (response) {
+              console.log("Is this correct")
+              console.log(response.data)
+              $("#loader").hide();
+              $("#vinput").show();
+              $("#vinput").val(response.data);
+              $("#vsave").show();
 
-                    $("#vsave").click(function () {
-                        $("#verify").hide();
-                        axios.post('/correctParse/' + id, {
-                                text: $("#vinput").val()
-                            })
-                            .then(function (response) {
-                                console.log(response.data)
-                            })
+              $("#vsave").click(function () {
+                  $("#verify").hide();
+                  axios.post('/correctParse/' + id, {
+                          text: $("#vinput").val()
+                      })
+                      .then(function (response) {
+                          console.log(response.data)
+                      })
+              })
+          })
+        })
 
-                    })
-
-                })
-
-            })
     })
+
+    function saveNotes(callback){
+      axios.post('/addnote', {
+              data: {
+                  title: $("#title").text(),
+                  stroke_data: sketchpad.toObject(),
+                  image: $("#sketchpad")[0].toDataURL(),
+                  id: id
+              }
+          })
+          .then(function (response) {
+              if (id.length == 0) {
+                  id = response.data
+                  console.log(id)
+              }
+              if(callback)
+                callback(response)
+
+          })
+          .catch(function (response) {
+              console.log(response)
+              console.log('Error Saving Notes');
+          });
+    }
 
 });
