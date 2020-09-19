@@ -119,6 +119,11 @@ $(document).ready(function () {
               if (!localStorage.getItem('id')) {
                   localStorage.setItem('id',response.data)
               }
+              new Noty({
+                  text: 'Saved Successfuly!',
+                  type: 'success',
+                  theme: 'relax'
+              }).show();
               if(callback)
                 callback(response)
 
