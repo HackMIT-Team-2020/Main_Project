@@ -1,0 +1,21 @@
+
+body{
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+main{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-template-areas: "left" "right";
+}
+.tan-side{
+  grid-area: "left";
+  background-color: var(--tan);
+}
+.navy-side{
+  grid-area: "right";
+  background-color: var(--navy);
+}

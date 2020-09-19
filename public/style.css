@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Aleo';
+    src: url('Aleo-RegularItalic.woff2') format('woff2'),
+        url('Aleo-RegularItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('Aleo-Bold.woff2') format('woff2'),
+        url('Aleo-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('Aleo-Light.woff2') format('woff2'),
+        url('Aleo-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('Aleo-Regular.woff2') format('woff2'),
+        url('Aleo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('Aleo-BoldItalic.woff2') format('woff2'),
+        url('Aleo-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aleo';
+    src: url('Aleo-LightItalic.woff2') format('woff2'),
+        url('Aleo-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+body, input[type=text], input[type=submit]{
+  font-family: "Aleo", serif;
+}
+:root{
+  --navy: #283D46;
+  --tan: #DECBB2;
+  --beige: #BDAE9A;
+  --brown: #7B6D5C;
+  --pink: #C87672;
+}
