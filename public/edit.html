@@ -35,10 +35,27 @@
     </main>
     <aside>
         <div id="butn-container">
-            <div id="parseText" class="butn"><img src="./assets/save-brown.svg" /></div>
-            <div id="undo" class="butn"><img src="./assets/undo.svg" /></div>
+            <div id="parseText" class="butn"><img src="./assets/brain.svg" alt="brain"/></div>
+            <div id="undo" class="butn"><img src="./assets/undo.svg" alt="undo" /></div>
             <div id="redo" class="butn"><img src="./assets/redo.svg" alt="redo" /></div>
-            <input id="color_picker" type="color"></input>
+            <div class="colors">
+              <span id="color_front"><img src="./assets/color-drop.svg" style=""></span>
+            <input id="color_picker" list="color-palette" type="color" value="#283D46"></input>
+            <datalist id="color-palette">
+              <option>
+                #C87672
+              </option>
+              <option>
+                #283D46
+              </option>
+              <option>
+                #DECBB2
+              </option>
+              <option>
+                #7B6D5C
+              </option>
+            </datalist>
+            </div>
             <div id="saveimg" class="butn"><img src="./assets/save.svg" alt="save" /></div>
     </aside>
 </body>
