@@ -1,0 +1,11 @@
+.butn {
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-decoration: none;
+    width: 100px;
+    text-align: center;
+}
