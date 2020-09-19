@@ -1,4 +1,10 @@
-var id = ''
+function getQueryString( field, url ) {
+	const href = url ? url : window.location.href;
+	const reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+	const string = reg.exec(href);
+	return string ? string[1] : null;
+};
+
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
@@ -6,8 +12,9 @@ $(document).ready(function () {
         height: 550,
     });
 
-    if (localStorage.getItem('openid') != null) {
-        axios.get('/getnote/' + localStorage.getItem('openid'))
+    if (getQueryString('id') != null) {
+        localStorage.setItem('id', getQueryString('id'))
+        axios.get('/getnote/' + localStorage.getItem('id'))
             .then(function (response) {
                 console.log(response.data.stroke_data)
                 $("#title").text(response.data.title);
@@ -78,11 +85,8 @@ $(document).ready(function () {
 
         saveNotes(function (response) {
           console.log(response)
-          if (id.length == 0)
-              id = response.data
-          axios.get('/parseNote/' + id).then(function (response) {
-              console.log("Is this correct")
-              console.log(response.data)
+          axios.get('/parseNote/' + localStorage.getItem('id')).then(function (response) {
+              console.log("Parsed Text\n"+response.data)
               $("#loader").hide();
               $("#vinput").show();
               $("#vinput").val(response.data);
@@ -90,7 +94,7 @@ $(document).ready(function () {
 
               $("#vsave").click(function () {
                   $("#verify").hide();
-                  axios.post('/correctParse/' + id, {
+                  axios.post('/correctParse/' + localStorage.getItem('id'), {
                           text: $("#vinput").val()
                       })
                       .then(function (response) {
@@ -108,13 +112,12 @@ $(document).ready(function () {
                   title: $("#title").text(),
                   stroke_data: sketchpad.toObject(),
                   image: $("#sketchpad")[0].toDataURL(),
-                  id: id
+                  id: localStorage.getItem('id')!=null?localStorage.getItem('id'):''
               }
           })
           .then(function (response) {
-              if (id.length == 0) {
-                  id = response.data
-                  console.log(id)
+              if (!localStorage.getItem('id')) {
+                  localStorage.setItem('id',response.data)
               }
               if(callback)
                 callback(response)
