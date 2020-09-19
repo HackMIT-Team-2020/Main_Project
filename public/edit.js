@@ -1,9 +1,3 @@
-const getQueryString = function ( field, url ) {
-  const href = url ? url : window.location.href;
-  const reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-  const string = reg.exec(href);
-  return string ? string[1] : null;
-};
 
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
@@ -11,8 +5,19 @@ $(document).ready(function () {
         width: 800,
         height: 550,
     });
-    var id = ''
-    console.log(getQueryString('id'))
+
+    if(localStorage.getItem('openid')!=null){
+      axios.get('/getnote/'+localStorage.getItem('openid'))
+      .then(function (response) {
+        // console.log(sketchpad.toObject())
+        $("#title").text(response.data.title);
+        output = JSON.parse(response.data.stroke_data)
+        // sketchpad.fromJSON(output)
+        sketchpad = new Sketchpad(output)
+        // console.log(output)
+        // console.log(sketchpad)
+      })
+    }
 
     $("#ctinput").hide();
     $("#ctsubmit").hide();
