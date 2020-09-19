@@ -4,6 +4,7 @@ $(document).ready(function () {
         width: 400,
         height: 518,
     });
+    var id = ''
 
     $("#ctinput").hide();
     $("#ctsubmit").hide();
@@ -54,12 +55,16 @@ $(document).ready(function () {
                 data: {
                     title: $("#title").text(),
                     stroke_data: sketchpad.toJSON(),
-                    image: $("#sketchpad")[0].toDataURL()
+                    image: $("#sketchpad")[0].toDataURL(),
+                    id: id
                 }
             })
             .then(function (response) {
-                console.log('success');
+                if(id.length == 0){
+                  id = response.data
+                }
                 console.log(response)
+                console.log(id)
             })
             .catch(function (response) {
                 console.log('error');
