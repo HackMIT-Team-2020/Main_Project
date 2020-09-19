@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
-        width: 700,
-        height: 906,
+        width: 800,
+        height: 550,
     });
     var id = ''
 
