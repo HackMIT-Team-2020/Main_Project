@@ -6,6 +6,7 @@ app.use(bodyParser.json({limit: '500mb', extended: true}));
 const favicon = require('serve-favicon');
 const port = 3000
 const path = require('path')
+const fs = require('fs')
 
 app.use(express.static('public'))
 // app.use(favicon(path.join(__dirname, 'public', 'media', 'favicon.ico')))
@@ -73,7 +74,10 @@ app.post('/addnote', function (req, res) {
     db.get('notes').push(data).write()
     res.send(data.id);
   }
-
+  const base64Image = data.image.split(';base64,').pop();
+  fs.writeFile(path.join('images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
+      console.log('File created for '+data.id);
+  });
 })
 
 app.listen(port, () => {
