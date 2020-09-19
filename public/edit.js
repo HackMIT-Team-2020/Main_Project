@@ -4,7 +4,14 @@ function getQueryString( field, url ) {
 	const string = reg.exec(href);
 	return string ? string[1] : null;
 };
+$("#color_picker").change(function(event) {
+    console.log($(this).val());
+    $("#color_front").css('background-color',$(this).val());
+});
 
+$("#color_front").click(function(event) {
+    $("#color_picker").click();
+});
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
