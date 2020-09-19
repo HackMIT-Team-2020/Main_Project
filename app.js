@@ -41,12 +41,19 @@ app.get('/getnotes', function (req, res) {
 
 app.post('/addnote', function (req, res) {
   if(!req.body.title)
-    res.send("Missing Parameter")
+    res.send("Missing Title Parameter")
   else{
     var id = crypto.randomBytes(20).toString('hex');
-    db.get('notes').push({id: id, title:req.body.title}).write()
+    db.get('notes').push({
+        id: id,
+        title:req.body.title,
+        // stroke_data: req.body.stroke_data,
+        // image: req.body.image,
+        time: Date.now(),
+      }).write()
     res.send(id);
   }
+
 })
 
 app.listen(port, () => {
