@@ -47,8 +47,13 @@ app.get('/parseNote/:id', function (req, res) {
   if(db.get('notes').find({id:req.params.id}).value()){
     imgPath = path.join('public', 'images', req.params.id+'.png')
     gcp.send(imgPath, function(parsedText){
-      db.get('notes').find({id:req.params.id}).assign({text: parsedText}).write()
-      res.send(parsedText)
+      if(parsedText){
+        db.get('notes').find({id:req.params.id}).assign({text: parsedText}).write()
+        res.send(parsedText)
+      }
+      else{
+        res.send("NO TEXT DETECTED")
+      }
     })
   }
   else{
@@ -81,15 +86,11 @@ app.post('/addnote', function (req, res) {
     }
   }
 
-  const base64Image = data.image.split(';base64,').pop();
-  fs.writeFileSync(path.join('public','images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
-      console.log('File created for '+data.id);
-  });
-  
   data.last_saved = Date.now()
   //Update case
   if(data.id && data.id.length>0){
     if(db.get('notes').find({ id: data.id}).value()){
+      saveImage(data.id, data.image)
       db.get('notes').find({ id: data.id}).assign(data).write();
       res.send("Updated Note");
     }
@@ -100,12 +101,20 @@ app.post('/addnote', function (req, res) {
   //Add new note case
   else{
     data.id = crypto.randomBytes(20).toString('hex');
+    saveImage(data.id, data.image)
     data.external_id = crypto.randomBytes(6).toString('hex');
     db.get('notes').push(data).write()
     res.send(data.id);
   }
 
 })
+
+function saveImage(id, imageData){
+  const base64Image = imageData.split(';base64,').pop();
+  fs.writeFileSync(path.join('public','images',id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
+      console.log('File created for '+id);
+  });
+}
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
