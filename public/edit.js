@@ -23,12 +23,14 @@ $(document).ready(function () {
     $("#changetitle").click(function () {
         $("#ctinput").show();
         $("#ctsubmit").show();
+        $("#changetitle").hide();
     });
 
     $("#ctsubmit").click(function () {
         $("#ctinput").hide();
         $("#ctsubmit").hide();
         $("#title").text($('#ctinput').val());
+        $("#changetitle").show();
     });
 
 });
