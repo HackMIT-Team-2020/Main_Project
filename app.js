@@ -6,6 +6,7 @@ app.use(bodyParser.json({limit: '500mb', extended: true}));
 const favicon = require('serve-favicon');
 const port = 3000
 const path = require('path')
+const fs = require('fs')
 
 app.use(express.static('public'))
 // app.use(favicon(path.join(__dirname, 'public', 'media', 'favicon.ico')))
@@ -39,9 +40,33 @@ app.get('/getnote/:id', function (req, res) {
   res.send(db.get('notes').find({id:req.params.id}).value());
 })
 
-// app.get('/note/:noteid', function (req, res) {
-//   res.send(db.get('notes'));
-// })
+const gcp = require('./send_gcp_request.js')
+
+
+app.get('/parseNote/:id', function (req, res) {
+  if(db.get('notes').find({id:req.params.id}).value()){
+    imgPath = path.join('public', 'images', req.params.id+'.png')
+    gcp.send(imgPath, function(parsedText){
+      db.get('notes').find({id:req.params.id}).assign({text: parsedText}).write()
+      res.send(parsedText)
+    })
+  }
+  else{
+    console.log(req.params.id)
+    res.sendStatus(404)
+  }
+})
+
+app.post('/correctParse/:id', function (req, res) {
+  const corrected_text =  req.body.data.text
+  if(db.get('notes').find({id:req.params.id}).value()){
+      db.get('notes').find({id:req.params.id}).assign({text: corrected_text}).write()
+  }
+  else{
+    console.log(req.params.id)
+    res.sendStatus(404)
+  }
+})
 
 app.post('/addnote', function (req, res) {
   //Checking request to see if its valid
@@ -73,7 +98,10 @@ app.post('/addnote', function (req, res) {
     db.get('notes').push(data).write()
     res.send(data.id);
   }
-
+  const base64Image = data.image.split(';base64,').pop();
+  fs.writeFile(path.join('public','images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
+      console.log('File created for '+data.id);
+  });
 })
 
 app.listen(port, () => {
