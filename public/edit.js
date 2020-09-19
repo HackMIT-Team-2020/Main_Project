@@ -95,7 +95,7 @@ $(document).ready(function () {
         axios.post('/addnote', {
                 data: {
                     title: $("#title").text(),
-                    stroke_data: sketchpad.toJSON(),
+                    stroke_data: sketchpad.toObject(),
                     image: $("#sketchpad")[0].toDataURL(),
                     id: id
                 }
