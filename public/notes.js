@@ -8,6 +8,10 @@ $(document).ready(function () {
 
     });
 
+    $("#newnote").click(function () {
+        localStorage.setItem('openid', '');
+        window.location.href = "/edit.html";
+    });
 });
 
 function clickNote(id) {
