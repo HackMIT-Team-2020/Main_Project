@@ -1,5 +1,6 @@
-$(document).ready(function () {
-    axios.get('/getnotes').then(function (response) {
+$(window).on('pageshow',function () {
+    //Stop caching me chrome :(
+    axios.get('/getnotes?time='+Date.now()).then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
             var data = response.data[i];
             console.log(data);
