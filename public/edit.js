@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
-        width: 400,
-        height: 518,
+        width: 700,
+        height: 906,
     });
     var id = ''
 
@@ -60,8 +60,8 @@ $(document).ready(function () {
                 }
             })
             .then(function (response) {
-                if(id.length == 0){
-                  id = response.data
+                if (id.length == 0) {
+                    id = response.data
                 }
                 console.log(response)
                 console.log(id)

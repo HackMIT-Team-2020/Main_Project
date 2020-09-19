@@ -11,19 +11,42 @@
     border-radius: 5px;
 }
 
-#main-body {
+#butn-container {
+    display: flex;
+    justify-content: center;
+}
+
+#container {
     margin: auto;
     width: 800px;
     border: 5px solid #2A3D45;
     background-color: #C17C74;
     padding: 20px;
     border-radius: 25px;
-    color: #DDC9B4;
+    color: #2A3D45;
 }
 
 #sketchpad {
     background-color: white;
     border-radius: 5px;
+    display: table;
+    margin: 0 auto;
+}
+
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
 }
 
 body {
