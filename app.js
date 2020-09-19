@@ -57,7 +57,7 @@ app.get('/parseNote/:id', function (req, res) {
   }
 })
 
-app.get('/correctParse/:id', function (req, res) {
+app.post('/correctParse/:id', function (req, res) {
   const corrected_text =  req.body.data.text
   if(db.get('notes').find({id:req.params.id}).value()){
       db.get('notes').find({id:req.params.id}).assign({text: corrected_text}).write()
