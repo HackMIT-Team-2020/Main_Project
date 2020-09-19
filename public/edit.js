@@ -1,23 +1,22 @@
-
+var id = ''
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
         width: 800,
         height: 550,
     });
-
-    if(localStorage.getItem('openid')!=null){
-      axios.get('/getnote/'+localStorage.getItem('openid'))
-      .then(function (response) {
-        // console.log(sketchpad.toObject())
-        $("#title").text(response.data.title);
-        output = JSON.parse(response.data.stroke_data)
-        // sketchpad.fromJSON(output)
-        sketchpad = new Sketchpad(output)
-        // console.log(output)
-        // console.log(sketchpad)
-      })
-    }
+    // if(localStorage.getItem('openid')!=null){
+    //   axios.get('/getnote/'+localStorage.getItem('openid'))
+    //   .then(function (response) {
+    //     // console.log(sketchpad.toObject())
+    //     $("#title").text(response.data.title);
+    //     output = JSON.parse(response.data.stroke_data)
+    //     // sketchpad.fromJSON(output)
+    //     sketchpad = new Sketchpad(output)
+    //     // console.log(output)
+    //     // console.log(sketchpad)
+    //   })
+    // }
 
     $("#ctinput").hide();
     $("#ctsubmit").hide();
@@ -83,7 +82,29 @@ $(document).ready(function () {
             .catch(function (response) {
                 console.log('error');
             });
+    })
 
+    $("#parseText").click(function () {
+        console.log("Pressed Brown Save")
+        axios.post('/addnote', {
+            data: {
+                title: $("#title").text(),
+                stroke_data: sketchpad.toJSON(),
+                image: $("#sketchpad")[0].toDataURL(),
+                id: id
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            if (id.length == 0)
+                id = response.data
+            axios.get('/parseNote/'+id).then(function(response){
+              console.log("Is this correct")
+              console.log(response.data)
+
+            })
+
+        })
     })
 
 });
