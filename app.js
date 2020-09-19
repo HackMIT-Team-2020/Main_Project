@@ -10,12 +10,10 @@ app.use(express.static('public'))
 // app.use(favicon(path.join(__dirname, 'public', 'media', 'favicon.ico')))
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/index.html'));
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 })
 
-app.get('/newnote', function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/edit.html'));
-})
+
 
 
 
