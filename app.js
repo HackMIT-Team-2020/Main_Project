@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const app = express()
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const favicon = require('serve-favicon');
 const port = 3000
 const path = require('path')
@@ -40,13 +40,13 @@ app.get('/getnotes', function (req, res) {
 // })
 
 app.post('/addnote', function (req, res) {
-  if(!req.body.title)
-    res.send("Missing Title Parameter")
+  if(!req.body.data.title)
+    res.send("Missing the Title Parameter ")
   else{
     var id = crypto.randomBytes(20).toString('hex');
     db.get('notes').push({
         id: id,
-        title:req.body.title,
+        title:req.body.data.title,
         // stroke_data: req.body.stroke_data,
         // image: req.body.image,
         time: Date.now(),
