@@ -81,6 +81,11 @@ app.post('/addnote', function (req, res) {
     }
   }
 
+  const base64Image = data.image.split(';base64,').pop();
+  fs.writeFileSync(path.join('public','images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
+      console.log('File created for '+data.id);
+  });
+  
   data.last_saved = Date.now()
   //Update case
   if(data.id && data.id.length>0){
@@ -99,10 +104,7 @@ app.post('/addnote', function (req, res) {
     db.get('notes').push(data).write()
     res.send(data.id);
   }
-  const base64Image = data.image.split(';base64,').pop();
-  fs.writeFile(path.join('public','images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
-      console.log('File created for '+data.id);
-  });
+
 })
 
 app.listen(port, () => {

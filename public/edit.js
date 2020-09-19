@@ -83,7 +83,29 @@ $(document).ready(function () {
             .catch(function (response) {
                 console.log('error');
             });
+    })
 
+    $("#parseText").click(function () {
+        console.log("Pressed Brown Save")
+        axios.post('/addnote', {
+                data: {
+                    title: $("#title").text(),
+                    stroke_data: sketchpad.toJSON(),
+                    image: $("#sketchpad")[0].toDataURL(),
+                    id: id
+                }
+            })
+            .then(function (response) {
+                console.log(response)
+                if (id.length == 0)
+                    id = response.data
+                axios.get('/parseNote/' + id).then(function (response) {
+                    console.log("Is this correct")
+                    console.log(response.data)
+
+                })
+
+            })
     })
 
 });
