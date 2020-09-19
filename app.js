@@ -1,7 +1,8 @@
 const express = require('express')
-const bodyParser = require('body-parser');
+let bodyParser = require('body-parser');
 const app = express()
-app.use(bodyParser.json());
+
+app.use(bodyParser.json({limit: '500mb', extended: true}));
 const favicon = require('serve-favicon');
 const port = 3000
 const path = require('path')
@@ -25,8 +26,7 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
-db.defaults({ notes: []})
-  .write()
+db.defaults({ notes: []}).write()
 
 
 
@@ -35,23 +35,43 @@ app.get('/getnotes', function (req, res) {
   res.send(db.get('notes'));
 })
 
+app.get('/getnote/:id', function (req, res) {
+  res.send(db.get('notes').find(req.params.id).value());
+})
+
 // app.get('/note/:noteid', function (req, res) {
 //   res.send(db.get('notes'));
 // })
 
 app.post('/addnote', function (req, res) {
-  if(!req.body.data.title)
-    res.send("Missing the Title Parameter ")
+  //Checking request to see if its valid
+  const data = req.body.data
+  required_params = [data.title, data.stroke_data, data.image]
+  for(param of required_params){
+    if(!param){
+      console.log("Missing:"+param)
+      res.sendStatus(421)
+      return
+    }
+  }
+
+  data.last_saved = Date.now()
+  //Update case
+  if(data.id && data.id.length>0){
+    if(db.get('notes').find({ id: data.id}).value()){
+      db.get('notes').find({ id: data.id}).assign(data).write();
+      res.send("Updated Note");
+    }
+    else{
+      res.sendStatus(404)
+    }
+  }
+  //Add new note case
   else{
-    var id = crypto.randomBytes(20).toString('hex');
-    db.get('notes').push({
-        id: id,
-        title:req.body.data.title,
-        stroke_data: req.body.data.stroke_data,
-        image: req.body.data.image,
-        time: Date.now(),
-      }).write()
-    res.send(id);
+    data.id = crypto.randomBytes(20).toString('hex');
+    data.external_id = crypto.randomBytes(6).toString('hex');
+    db.get('notes').push(data).write()
+    res.send(data.id);
   }
 
 })
