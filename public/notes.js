@@ -1,10 +1,25 @@
 $(window).on('pageshow',function () {
+    // inline styling:
+    // text-decoration:none; color: black;
+    ///
+    const Note_Card = ({id, title}) => `
+        <a href="/edit.html?id=${id}" style="text-decoration:none; color: black;">
+          <div class="card">
+            <img class="card-img-top" src="/images/${id}.png" alt="notes preview" style="width: 200px;" "="">
+            <div class="card-body">
+              <h5 class="card-title">${title}</h5>
+            </div>
+          </div>
+        </a>
+    `;
     //Stop caching me chrome :(
     axios.get('/getnotes?time='+Date.now()).then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
             var data = response.data[i];
             console.log(data);
-            $('#cardstack').prepend('<div class="card" id="' + data.id + '" onclick="clickNote(`' + data.id + '`)"><img class="card-img-top" src="/images/' + data.id + '.png" alt="notes preview" style="width: 200px;" "><div class="card-body"><h5 class="card-title">' + data.title + '</h5></div></div>');
+            $('#cardstack').prepend(
+              Note_Card({id:data.id, title:data.title})
+            );
         }
 
     });
@@ -34,8 +49,3 @@ $(window).on('pageshow',function () {
         window.location.href = "/edit.html";
     });
 });
-
-function clickNote(id) {
-    localStorage.setItem('openid', id);
-    window.location.href = "/edit.html?id=" + id;
-}
