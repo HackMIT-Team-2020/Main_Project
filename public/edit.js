@@ -5,6 +5,9 @@ $(document).ready(function () {
         height: 400,
     });
 
+    $("#ctinput").hide();
+    $("#ctsubmit").hide();
+
     $("#undo").click(function () {
         sketchpad.undo();
     });
@@ -16,4 +19,16 @@ $(document).ready(function () {
     $("#color_picker").change(function () {
         sketchpad.color = $(this).val();
     });
+
+    $("#changetitle").click(function () {
+        $("#ctinput").show();
+        $("#ctsubmit").show();
+    });
+
+    $("#ctsubmit").click(function () {
+        $("#ctinput").hide();
+        $("#ctsubmit").hide();
+        $("#title").text($('#ctinput').val());
+    });
+
 });
