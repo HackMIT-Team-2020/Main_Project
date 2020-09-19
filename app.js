@@ -75,7 +75,7 @@ app.post('/addnote', function (req, res) {
     res.send(data.id);
   }
   const base64Image = data.image.split(';base64,').pop();
-  fs.writeFile(path.join('images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
+  fs.writeFile(path.join('public','images',data.id+'.png'), base64Image, {encoding: 'base64'}, function(err) {
       console.log('File created for '+data.id);
   });
 })
