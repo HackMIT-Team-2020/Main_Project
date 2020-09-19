@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/newnote', function (req, res) {
-  res.sendFile(path.join(__dirname + '/views/index.html'));
+  res.sendFile(path.join(__dirname + '/views/edit.html'));
 })
 
 
@@ -29,6 +29,8 @@ const db = low(adapter)
 
 db.defaults({ notes: []})
   .write()
+
+
 
 // API Calls
 app.get('/getnotes', function (req, res) {
