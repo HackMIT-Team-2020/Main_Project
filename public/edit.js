@@ -2,7 +2,7 @@ $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
         width: 400,
-        height: 400,
+        height: 518,
     });
 
     $("#ctinput").hide();
@@ -30,7 +30,47 @@ $(document).ready(function () {
         $("#ctinput").hide();
         $("#ctsubmit").hide();
         $("#title").text($('#ctinput').val());
+        axios.post('/addnote', {
+                data: {
+                    title: $('#ctinput').val()
+                }
+            })
+            .then(function (response) {
+                console.log('success');
+                console.log(response)
+            })
+            .catch(function (response) {
+                console.log('error');
+            });
         $("#changetitle").show();
     });
+
+    $("#saveimg").click(function () {
+        axios.post('/addnote', {
+                data: {
+                    stroke_data: sketchpad.toJSON()
+                }
+            })
+            .then(function (response) {
+                console.log('success');
+                console.log(response)
+            })
+            .catch(function (response) {
+                console.log('error');
+            });
+
+        axios.post('/addnote', {
+                data: {
+                    image: $("#sketchpad")[0].toDataURL()
+                }
+            })
+            .then(function (response) {
+                console.log('success');
+                console.log(response)
+            })
+            .catch(function (response) {
+                console.log('error');
+            });
+    })
 
 });
