@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Write Notes</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sketchpad/0.1.0/scripts/sketchpad.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="edit.js"></script>
+    <link style="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="edit.css">
 </head>
 
 <body>
+  <main>
     <div id="container">
+      <div class="title-header">
         <h1 id="title">Note Title</h1>
-        <div id="changetitle" class="butn">Change Title</div>
-        <br>
+        <div id="changetitle" class="butn"><img src="./assets/edit-brown.svg" alt="edit"/></div>
         <input type="text" id="ctinput">
-        <div id="ctsubmit" class="butn">Save</div>
-        <div id="ctcancel" class="butn">Cancel</div>
+        <div id="ctsubmit" class="butn"><img src="./assets/save-brown.svg" alt="save"/></div>
+        <div id="ctcancel" class="butn"><img src="./assets/cancel.svg" alt="cancel"/></div>
+      </div>
+      <canvas id="sketchpad"></canvas>
+      </div>
+  </main>
+  <aside>
 
-        <canvas id="sketchpad"></canvas>
-
-        <br>
-        <div id="butn-container">
-            <div id="undo" class="butn">undo</div>
-            <div id="redo" class="butn">redo</div>
-            <input id="color_picker" type="color">
-            <div id="saveimg" class="butn">Save Note</div>
-            <div id="mkquiz" class="butn">Make Quiz</div>
-        </div>
+    <div id="butn-container">
+          <div id="undo" class="butn"><img src="./assets/undo.svg" /></div>
+          <div id="redo" class="butn"><img src="./assets/redo.svg" alt="redo"/></div>
+          <input id="color_picker" type="color"><!--<img src="./assets/colordrop.svg" />--></input>
+          <div id="saveimg" class="butn"><img src="./assets/save.svg" alt="save"/></div>
     </div>
 
-
-
+  </aside>
 </body>
 
 </html>

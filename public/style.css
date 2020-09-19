@@ -51,6 +51,11 @@
     font-style: italic;
     font-display: swap;
 }
+body{
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
 body, input[type=text], input[type=submit]{
   font-family: "Aleo", serif;
 }

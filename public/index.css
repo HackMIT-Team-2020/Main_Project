@@ -1,6 +1,5 @@
 
 body{
-  margin: 0;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -34,12 +33,14 @@ h1{
   color: var(--navy);
   font-size: 3em;
 }
-::placeholder{
-  color: var(--tan);
-}
 input[type=text], input[type=submit]{
   font-size: 1.3em;
-  border-radius: 16px;
+  border-radius: 24px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
 }
 input[type=text]{
   border: 5px solid var(--tan);
@@ -47,19 +48,24 @@ input[type=text]{
   background-color: transparent;
   width: 75%;
   padding: 8px;
-  margin-bottom: 1%;
+  margin-bottom: 3%;
+}
+input[type=text]:hover{
+  background-color: var(--tan);
+  color:var(--navy);
+}
+input[type=text]::placeholder{
+  color: var(--tan);
+}
+input[type=text]:hover::placeholder{
+  color:var(--navy);
 }
 input[type=submit]{
   border: 5px solid var(--tan);
-  text-transform: uppercase;
   background-color: var(--tan);
+  color: var(--navy);
   width: 50%;
   padding: 16px;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
 }
 input[type=submit]:hover{
   color: var(--tan);
