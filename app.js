@@ -40,6 +40,10 @@ app.get('/getnote/:id', function (req, res) {
   res.send(db.get('notes').find({id:req.params.id}).value());
 })
 
+app.get('/getnote_text/:id', function (req, res) {
+  res.send(db.get('notes').find({id:req.params.id}).value().text);
+})
+
 const gcp = require('./send_gcp_request.js')
 
 
