@@ -91,15 +91,16 @@ function getNextReview(note){
   const len = note.review_times.length
   let days_reviewed = 0
   let time_diff = 0
-  if(len!=0)
-    days_reviewed = (note.review_times[len-1]-note.review_times[0])/86400
+  if(len!=0){
+    days_reviewed = (note.review_times[len-1]-note.review_times[0])/(86400 * 1000)
     time_diff = (note.review_times[len-1]-note.review_times[0])
-
+  }
+  console.log(days_reviewed)
   if(days_reviewed <= 1){
-    return note.time_saved + 86400
+    return note.time_saved + 86400 * 1000
   }
   else if(days_reviewed <= 3){
-    return note.time_saved + 86400 * 2
+    return note.time_saved + 86400 * 2 * 1000
   }
   else if(days_reviewed > 3){
     return note.time_saved + time_diff * note.review_scores(len-1)
