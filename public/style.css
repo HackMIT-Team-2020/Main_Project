@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Aleo';
-    src: url('Aleo-RegularItalic.woff2') format('woff2'),
-        url('Aleo-RegularItalic.woff') format('woff');
+    src: url('assets/AleoRegularItalic.woff2') format('woff2'),
+        url('assets/AleoRegularItalic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -9,8 +9,8 @@
 
 @font-face {
     font-family: 'Aleo';
-    src: url('Aleo-Bold.woff2') format('woff2'),
-        url('Aleo-Bold.woff') format('woff');
+    src: url('assets/AleoBold.woff2') format('woff2'),
+        url('assets/AleoBold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -18,8 +18,8 @@
 
 @font-face {
     font-family: 'Aleo';
-    src: url('Aleo-Light.woff2') format('woff2'),
-        url('Aleo-Light.woff') format('woff');
+    src: url('assets/AleoLight.woff2') format('woff2'),
+        url('assets/AleoLight.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -27,8 +27,8 @@
 
 @font-face {
     font-family: 'Aleo';
-    src: url('Aleo-Regular.woff2') format('woff2'),
-        url('Aleo-Regular.woff') format('woff');
+    src: url('assets/AleoRegular.woff2') format('woff2'),
+        url('assets/AleoRegular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -36,8 +36,8 @@
 
 @font-face {
     font-family: 'Aleo';
-    src: url('Aleo-BoldItalic.woff2') format('woff2'),
-        url('Aleo-BoldItalic.woff') format('woff');
+    src: url('assets/AleoBoldItalic.woff2') format('woff2'),
+        url('assets/AleoBoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -45,8 +45,8 @@
 
 @font-face {
     font-family: 'Aleo';
-    src: url('Aleo-LightItalic.woff2') format('woff2'),
-        url('Aleo-LightItalic.woff') format('woff');
+    src: url('assets/AleoLightItalic.woff2') format('woff2'),
+        url('assets/AleoLightItalic.woff') format('woff');
     font-weight: 300;
     font-style: italic;
     font-display: swap;
