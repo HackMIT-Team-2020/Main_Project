@@ -1,0 +1,70 @@
+
+body{
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+main{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-template-areas: "left" "right";
+  /*background-image: url(./assets/login-background.svg);*/
+}
+section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tan-side{
+  grid-area: "left";
+  background-color: var(--tan);
+}
+.navy-side{
+  grid-area: "right";
+  background-color: var(--navy);
+}
+.logo{
+  width: 50%;
+}
+h1{
+  color: var(--navy);
+  font-size: 3em;
+}
+::placeholder{
+  color: var(--tan);
+}
+input[type=text], input[type=submit]{
+  font-size: 1.3em;
+  border-radius: 16px;
+}
+input[type=text]{
+  border: 5px solid var(--tan);
+  color: var(--tan);
+  background-color: transparent;
+  width: 75%;
+  padding: 8px;
+  margin-bottom: 1%;
+}
+input[type=submit]{
+  border: 5px solid var(--tan);
+  text-transform: uppercase;
+  background-color: var(--tan);
+  width: 50%;
+  padding: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+input[type=submit]:hover{
+  color: var(--tan);
+  background-color: transparent;
+  -webkit-transform: scale(1.01);
+  transform: scale(1.01);
+  transform: translateY(8px);
+}
