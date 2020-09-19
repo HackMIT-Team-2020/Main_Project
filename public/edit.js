@@ -12,4 +12,8 @@ $(document).ready(function () {
     $("#redo").click(function () {
         sketchpad.redo();
     });
+
+    $("#color_picker").change(function () {
+        sketchpad.color = $(this).val();
+    });
 });
