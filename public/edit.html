@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Note Title</title>
+    <title>Write NOtes</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sketchpad/0.1.0/scripts/sketchpad.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
@@ -11,17 +11,27 @@
 </head>
 
 <body>
-    <h1 id="title">Note Title</h1>
-    <div id="changetitle" class="butn">Change Title</div>
-    <input type="text" id="ctinput">
-    <div id="ctsubmit" class="butn">Save</div>
+    <div id="container">
+        <h1 id="title">Note Title</h1>
+        <div id="changetitle" class="butn">Change Title</div>
+        <br>
+        <input type="text" id="ctinput">
+        <div id="ctsubmit" class="butn">Save</div>
+        <div id="ctcancel" class="butn">Cancel</div>
 
-    <canvas id="sketchpad"></canvas>
-    <div id="undo" class="butn">undo</div>
-    <div id="redo" class="butn">redo</div>
-    <input id="color_picker" type="color">
+        <canvas id="sketchpad"></canvas>
 
-    <div id="saveimg" class="butn">Save Note</div>
+        <br>
+        <div id="butn-container">
+            <div id="undo" class="butn">undo</div>
+            <div id="redo" class="butn">redo</div>
+            <input id="color_picker" type="color">
+            <div id="saveimg" class="butn">Save Note</div>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>

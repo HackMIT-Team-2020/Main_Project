@@ -1,11 +1,54 @@
 .butn {
-    background-color: black;
+    background-color: #2A3D45;
     cursor: pointer;
-    color: white;
+    color: #DDC9B4;
     display: block;
     height: 40px;
     line-height: 40px;
     text-decoration: none;
     width: 100px;
     text-align: center;
+    border-radius: 5px;
+}
+
+#butn-container {
+    display: flex;
+    justify-content: center;
+}
+
+#container {
+    margin: auto;
+    width: 800px;
+    border: 5px solid #2A3D45;
+    background-color: #C17C74;
+    padding: 20px;
+    border-radius: 25px;
+    color: #2A3D45;
+}
+
+#sketchpad {
+    background-color: white;
+    border-radius: 5px;
+    display: table;
+    margin: 0 auto;
+}
+
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+body {
+    background-color: #DDC9B4;
 }
