@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Write Notes</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -10,27 +11,34 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="edit.css">
 </head>
+
 <body>
-  <main>
-    <div id="container">
-      <div class="title-header">
-        <h1 id="title">Note Title</h1>
-        <div id="changetitle" class="butn"><img src="./assets/edit-brown.svg" alt="edit"/></div>
-        <input type="text" id="ctinput">
-        <div id="ctsubmit" class="butn"><img src="./assets/save-brown.svg" alt="save"/></div>
-        <div id="ctcancel" class="butn"><img src="./assets/cancel.svg" alt="cancel"/></div>
-      </div>
-      <canvas id="sketchpad"></canvas>
-      </div>
-  </main>
-  <aside>
-    <div id="butn-container">
-          <div id="parseText" class="butn"><img src="./assets/save-brown.svg" /></div>
-          <div id="undo" class="butn"><img src="./assets/undo.svg" /></div>
-          <div id="redo" class="butn"><img src="./assets/redo.svg" alt="redo"/></div>
-          <input id="color_picker" type="color"></input>
-          <div id="saveimg" class="butn"><img src="./assets/save.svg" alt="save"/></div>
-  </aside>
+    <main>
+        <div id="container">
+            <div class="title-header">
+                <h1 id="title">Note Title</h1>
+                <div id="changetitle" class="butn"><img src="./assets/edit-brown.svg" alt="edit" /></div>
+                <input type="text" id="ctinput">
+                <div id="ctsubmit" class="butn"><img src="./assets/save-brown.svg" alt="save" /></div>
+                <div id="ctcancel" class="butn"><img src="./assets/cancel.svg" alt="cancel" /></div>
+            </div>
+            <canvas id="sketchpad"></canvas>
+
+            <div id="verify">
+                <div class="loader" id="loader"></div>
+                <input type="text" id="vinput">
+                <div class="butn" id="vsave">Save</div>
+            </div>
+        </div>
+    </main>
+    <aside>
+        <div id="butn-container">
+            <div id="parseText" class="butn"><img src="./assets/save-brown.svg" /></div>
+            <div id="undo" class="butn"><img src="./assets/undo.svg" /></div>
+            <div id="redo" class="butn"><img src="./assets/redo.svg" alt="redo" /></div>
+            <input id="color_picker" type="color"></input>
+            <div id="saveimg" class="butn"><img src="./assets/save.svg" alt="save" /></div>
+    </aside>
 </body>
 
 </html>

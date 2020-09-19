@@ -22,6 +22,7 @@ $(document).ready(function () {
     $("#ctinput").hide();
     $("#ctsubmit").hide();
     $("#ctcancel").hide();
+    $("#verify").hide();
 
     $("#undo").click(function () {
         sketchpad.undo();
@@ -87,6 +88,10 @@ $(document).ready(function () {
 
     $("#parseText").click(function () {
         console.log("Pressed Brown Save")
+        $("#verify").show();
+        $("#vinput").hide();
+        $("#vsave").hide();
+
         axios.post('/addnote', {
                 data: {
                     title: $("#title").text(),
@@ -102,6 +107,21 @@ $(document).ready(function () {
                 axios.get('/parseNote/' + id).then(function (response) {
                     console.log("Is this correct")
                     console.log(response.data)
+                    $("#loader").hide();
+                    $("#vinput").show();
+                    $("#vinput").val(response.data);
+                    $("#vsave").show();
+
+                    $("#vsave").click(function () {
+                        $("#verify").hide();
+                        axios.post('/correctParse/' + id, {
+                                text: $("#vinput").val()
+                            })
+                            .then(function (response) {
+                                console.log(response.data)
+                            })
+
+                    })
 
                 })
 
