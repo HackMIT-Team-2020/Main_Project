@@ -36,7 +36,7 @@ app.get('/getnotes', function (req, res) {
 })
 
 app.get('/getnote/:id', function (req, res) {
-  res.send(db.get('notes').find(req.params.id).value());
+  res.send(db.get('notes').find({id:req.params.id}).value());
 })
 
 // app.get('/note/:noteid', function (req, res) {
