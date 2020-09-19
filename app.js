@@ -40,9 +40,33 @@ app.get('/getnote/:id', function (req, res) {
   res.send(db.get('notes').find({id:req.params.id}).value());
 })
 
-// app.get('/note/:noteid', function (req, res) {
-//   res.send(db.get('notes'));
-// })
+const gcp = require('./send_gcp_request.js')
+
+
+app.get('/parseNote/:id', function (req, res) {
+  if(db.get('notes').find({id:req.params.id}).value()){
+    imgPath = path.join('public', 'images', req.params.id+'.png')
+    gcp.send(imgPath, function(parsedText){
+      db.get('notes').find({id:req.params.id}).assign({text: parsedText}).write()
+      res.send(parsedText)
+    })
+  }
+  else{
+    console.log(req.params.id)
+    res.sendStatus(404)
+  }
+})
+
+app.get('/correctParse/:id', function (req, res) {
+  const corrected_text =  req.body.data.text
+  if(db.get('notes').find({id:req.params.id}).value()){
+      db.get('notes').find({id:req.params.id}).assign({text: corrected_text}).write()
+  }
+  else{
+    console.log(req.params.id)
+    res.sendStatus(404)
+  }
+})
 
 app.post('/addnote', function (req, res) {
   //Checking request to see if its valid
