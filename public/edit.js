@@ -1,3 +1,10 @@
+const getQueryString = function ( field, url ) {
+  const href = url ? url : window.location.href;
+  const reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+  const string = reg.exec(href);
+  return string ? string[1] : null;
+};
+
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
@@ -5,6 +12,7 @@ $(document).ready(function () {
         height: 906,
     });
     var id = ''
+    console.log(getQueryString('id'))
 
     $("#ctinput").hide();
     $("#ctsubmit").hide();
@@ -49,6 +57,7 @@ $(document).ready(function () {
         $("#title").show();
         $("#changetitle").show();
     });
+
 
     $("#saveimg").click(function () {
         axios.post('/addnote', {
