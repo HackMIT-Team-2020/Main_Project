@@ -5,18 +5,19 @@ $(document).ready(function () {
         width: 800,
         height: 550,
     });
-    // if(localStorage.getItem('openid')!=null){
-    //   axios.get('/getnote/'+localStorage.getItem('openid'))
-    //   .then(function (response) {
-    //     // console.log(sketchpad.toObject())
-    //     $("#title").text(response.data.title);
-    //     output = JSON.parse(response.data.stroke_data)
-    //     // sketchpad.fromJSON(output)
-    //     sketchpad = new Sketchpad(output)
-    //     // console.log(output)
-    //     // console.log(sketchpad)
-    //   })
-    // }
+
+    if (localStorage.getItem('openid') != null) {
+        axios.get('/getnote/' + localStorage.getItem('openid'))
+            .then(function (response) {
+                console.log(response.data.stroke_data)
+                $("#title").text(response.data.title);
+                output = response.data.stroke_data;
+                output['element'] = '#sketchpad';
+                sketchpad = new Sketchpad(output);
+
+
+            })
+    }
 
     $("#ctinput").hide();
     $("#ctsubmit").hide();
@@ -67,7 +68,7 @@ $(document).ready(function () {
         axios.post('/addnote', {
                 data: {
                     title: $("#title").text(),
-                    stroke_data: sketchpad.toJSON(),
+                    stroke_data: sketchpad.toObject(),
                     image: $("#sketchpad")[0].toDataURL(),
                     id: id
                 }
@@ -87,24 +88,24 @@ $(document).ready(function () {
     $("#parseText").click(function () {
         console.log("Pressed Brown Save")
         axios.post('/addnote', {
-            data: {
-                title: $("#title").text(),
-                stroke_data: sketchpad.toJSON(),
-                image: $("#sketchpad")[0].toDataURL(),
-                id: id
-            }
-        })
-        .then(function (response) {
-            console.log(response)
-            if (id.length == 0)
-                id = response.data
-            axios.get('/parseNote/'+id).then(function(response){
-              console.log("Is this correct")
-              console.log(response.data)
+                data: {
+                    title: $("#title").text(),
+                    stroke_data: sketchpad.toJSON(),
+                    image: $("#sketchpad")[0].toDataURL(),
+                    id: id
+                }
+            })
+            .then(function (response) {
+                console.log(response)
+                if (id.length == 0)
+                    id = response.data
+                axios.get('/parseNote/' + id).then(function (response) {
+                    console.log("Is this correct")
+                    console.log(response.data)
+
+                })
 
             })
-
-        })
     })
 
 });
