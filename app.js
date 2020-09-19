@@ -47,8 +47,8 @@ app.post('/addnote', function (req, res) {
     db.get('notes').push({
         id: id,
         title:req.body.data.title,
-        // stroke_data: req.body.stroke_data,
-        // image: req.body.image,
+        stroke_data: req.body.stroke_data,
+        image: req.body.image,
         time: Date.now(),
       }).write()
     res.send(id);
