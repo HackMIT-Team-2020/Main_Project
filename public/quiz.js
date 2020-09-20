@@ -13,10 +13,10 @@ $(document).ready(function () {
             let isblank = response.data.startsWith("[")
             for(piece of toQuiz(response.data)){
               if(isblank){
-                $("#question").append('<input>')
+                $("#question").append('<input></input>')
               }
               else{
-                $("#question").append('<p>'+piece+'<p/>')
+                $("#question").append('<h3>'+piece+'<h3/>')
               }
               console.log("PIECE "+piece)
               isblank = !isblank
