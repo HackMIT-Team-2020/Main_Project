@@ -17,6 +17,13 @@ a, a:hover{
 .btn-navy{
   color: var(--tan);
   background-color: var(--navy);
+  transition: .3 ease-in-out;
+}
+.btn:hover{
+  color: var(--tan);
+}
+.btn-navy:hover{
+  transform: scale(1.05);
 }
 h1{font-size: 5em;}
 main {
