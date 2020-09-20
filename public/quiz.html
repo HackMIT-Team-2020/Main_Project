@@ -2,10 +2,17 @@
 <html>
 
 <head>
-    <title>Quiz</title>
-    <link style="stylesheet" href="normalize.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="quiz.css" />
+  <title>Review</title>
+  <link rel="stylesheet" href="normalize.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="quiz.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link style="stylesheet" href="normalize.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  <script src="quiz.js"></script>
 </head>
 
 <body>
@@ -15,10 +22,17 @@
   <main>
     <h1>Quiz.</h1>
     <div id="content">
-      <h3 id="question">This is a Question</h3>
-        <input type="text" id="0"> <!-- Create the input boxes dynamically, id them accordingly -->
+      <div id="question"></div>
+      <div id="score" class="modal">
+        <div class="butn" id="ok">OK</div>
+      </div>
     </div>
   </main>
+  <aside>
+    <a href="#"><img src="./assets/cancel.svg" id="submit" alt="cancel" /></a>
+  </aside>
+
+
 </body>
 
 </html>

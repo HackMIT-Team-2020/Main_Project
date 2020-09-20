@@ -1,22 +1,22 @@
-function getQueryString( field, url ) {
-	const href = url ? url : window.location.href;
-	const reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-	const string = reg.exec(href);
-	return string ? string[1] : null;
+function getQueryString(field, url) {
+    const href = url ? url : window.location.href;
+    const reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+    const string = reg.exec(href);
+    return string ? string[1] : null;
 };
-$("#color_picker").change(function(event) {
+$("#color_picker").change(function (event) {
     console.log($(this).val());
-    $("#color_front").css('background-color',$(this).val());
+    $("#color_front").css('background-color', $(this).val());
 });
 
-$("#color_front").click(function(event) {
+$("#color_front").click(function (event) {
     $("#color_picker").click();
 });
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
-        width: 800,
-        height: 550,
+        width: $(document).width() * 0.8,
+        height: $(document).height() * 0.8,
     });
 
     if (getQueryString('id') != null) {
@@ -26,12 +26,26 @@ $(document).ready(function () {
                 console.log(response.data.stroke_data)
                 $("#title").text(response.data.title);
                 output = response.data.stroke_data;
+                output.width = $(document).width() * 0.8
+                output.height = $(document).height() * 0.8
                 output['element'] = '#sketchpad';
                 sketchpad = new Sketchpad(output);
 
 
             })
     }
+
+    // $('#sketchpad').addEventListener('touchmove', function(event){
+    //     for(var i = 0; i < event.touches.length; i++){
+    //          if(event.touches[i].touchType === "stylus"){
+    //            continue;
+    //          }
+    //          else{
+    //            event.preventDefault()
+    //          }
+    //     }
+    // });
+
 
     $("#ctinput").hide();
     $("#ctsubmit").hide();
@@ -89,56 +103,62 @@ $(document).ready(function () {
         $("#verify").show();
         $("#vinput").hide();
         $("#vsave").hide();
+        $("#vclose").hide();
+
 
         saveNotes(function (response) {
-          console.log(response)
-          axios.get('/parseNote/' + localStorage.getItem('id')).then(function (response) {
-              console.log("Parsed Text\n"+response.data)
-              $("#loader").hide();
-              $("#vinput").show();
-              $("#vinput").val(response.data);
-              $("#vsave").show();
+            console.log(response)
+            axios.get('/parseNote/' + localStorage.getItem('id')).then(function (response) {
+                console.log("Parsed Text\n" + response.data)
+                $("#loader").hide();
+                $("#vinput").show();
+                $("#vinput").val(response.data);
+                $("#vsave").show();
+                $("#vclose").show();
 
-              $("#vsave").click(function () {
-                  $("#verify").hide();
-                  axios.post('/correctParse/' + localStorage.getItem('id'), {
-                          text: $("#vinput").val()
-                      })
-                      .then(function (response) {
-                          console.log(response.data)
-                      })
-              })
-          })
+                $("#vsave").click(function () {
+                    $("#verify").hide();
+                    axios.post('/correctParse/' + localStorage.getItem('id'), {
+                            text: $("#vinput").val()
+                        })
+                        .then(function (response) {
+                            console.log(response.data)
+                        })
+                })
+                $("#vclose").click(function () {
+                    $("#verify").hide();
+                })
+            })
         })
 
     })
 
-    function saveNotes(callback){
-      axios.post('/addnote', {
-              data: {
-                  title: $("#title").text(),
-                  stroke_data: sketchpad.toObject(),
-                  image: $("#sketchpad")[0].toDataURL(),
-                  id: localStorage.getItem('id')!=null?localStorage.getItem('id'):''
-              }
-          })
-          .then(function (response) {
-              if (!localStorage.getItem('id')) {
-                  localStorage.setItem('id',response.data)
-              }
-              new Noty({
-                  text: 'Saved Successfuly!',
-                  type: 'success',
-                  theme: 'relax'
-              }).show();
-              if(callback)
-                callback(response)
+    function saveNotes(callback) {
+        axios.post('/addnote', {
+                data: {
+                    title: $("#title").text(),
+                    stroke_data: sketchpad.toObject(),
+                    image: $("#sketchpad")[0].toDataURL(),
+                    id: localStorage.getItem('id') != null ? localStorage.getItem('id') : ''
+                }
+            })
+            .then(function (response) {
+                if (!localStorage.getItem('id')) {
+                    localStorage.setItem('id', response.data)
+                }
+                new Noty({
+                    text: 'Saved Successfuly!',
+                    type: 'success',
+                    theme: 'relax'
+                }).show();
+                if (callback)
+                    callback(response)
 
-          })
-          .catch(function (response) {
-              console.log(response)
-              console.log('Error Saving Notes');
-          });
+            })
+            .catch(function (response) {
+                console.log(response)
+                console.log('Error Saving Notes');
+            });
     }
 
 });

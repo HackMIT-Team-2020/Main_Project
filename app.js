@@ -40,6 +40,10 @@ app.get('/getnote/:id', function (req, res) {
   res.send(db.get('notes').find({id:req.params.id}).value());
 })
 
+app.get('/getnote_text/:id', function (req, res) {
+  res.send(db.get('notes').find({id:req.params.id}).value().text);
+})
+
 const gcp = require('./send_gcp_request.js')
 
 
@@ -48,7 +52,12 @@ app.get('/parseNote/:id', function (req, res) {
     imgPath = path.join('public', 'images', req.params.id+'.png')
     gcp.send(imgPath, function(parsedText){
       if(parsedText){
-        db.get('notes').find({id:req.params.id}).assign({text: parsedText}).write()
+        db.get('notes').find({id:req.params.id}).assign({
+          text: parsedText,
+          time_saved: Date.now(),
+          review_times:[],
+          review_scores:[]
+        }).write()
         res.send(parsedText)
       }
       else{
@@ -61,6 +70,49 @@ app.get('/parseNote/:id', function (req, res) {
     res.sendStatus(404)
   }
 })
+
+app.get('/review_schedule', function (req, res) {
+  output = []
+  for(note of db.get('notes')){
+    if(!(note.text && note.time_saved && note.review_times && note.review_scores)){
+      console.log(note.title+" Doesn't have required quiz params")
+    }
+    else{
+      const review_time = getNextReview(note)
+      console.log(note.title + '\t' + review_time)
+      output.push({
+        title:note.title,
+        id: note.id,
+        review_time: review_time
+        })
+    }
+  }
+  output.sort((itemA, itemB)=>{
+    return itemB.review_time - itemA.review_time
+  })
+  res.send(output);
+})
+
+function getNextReview(note){
+  const len = note.review_times.length
+  let days_reviewed = 0
+  let time_diff = 0
+  if(len!=0){
+    days_reviewed = (note.review_times[len-1]-note.review_times[0])/(86400 * 1000)
+    time_diff = (note.review_times[len-1]-note.review_times[0])
+  }
+  console.log(days_reviewed)
+  if(days_reviewed <= 1){
+    return note.time_saved + 86400 * 1000
+  }
+  else if(days_reviewed <= 3){
+    return note.time_saved + 86400 * 2 * 1000
+  }
+  else if(days_reviewed > 3){
+    return note.time_saved + time_diff * note.review_scores(len-1)
+  }
+
+}
 
 app.post('/correctParse/:id', function (req, res) {
   const corrected_text =  req.body.text
@@ -115,6 +167,20 @@ function saveImage(id, imageData){
       console.log('File created for '+id);
   });
 }
+
+app.post('/quiz', function (req, res) {
+  required = [req.body.id, req.body.score]
+  console.log(req.body)
+  data = db.get('notes').find({id:req.body.id}).value()
+  if(data){
+    data.review_times.push(Date.now())
+    data.review_scores.push(req.body.score)
+    db.get('notes').find({id:req.body.id}).assign(data).write()
+    res.send(getNextReview(data))
+  }
+  else
+    res.sendStatus(404);
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
