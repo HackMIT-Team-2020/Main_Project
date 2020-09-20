@@ -46,7 +46,8 @@ $(document).ready(function () {
             }
           }
           scoree = totalCor / correct.length;
-          $("#score").prepend("Your score is " + scoree + ".");
+          rounded = Math.round(scoree * 10000) / 100
+          $("#score").prepend("Your score is " + rounded + "%.");
           $("#score").show();
           $("#ok").click(function () {
             window.location.href = "/notes.html";
