@@ -1,5 +1,5 @@
 # Notention
-
+Do you ever feel like sometimes, even after putting in lots of hard work, you still struggle to retain certain concepts? Do you ever feel overwhelmed and don't know how to start studying because things are difficult to organize? To help students optimize their study routine, we have created Notention.
 Notention is a handwritten note-taking webapp with built-in spaced repetition, designed to help students remember the contents of their notes in a simple yet effective way.
 
 ## Demo
