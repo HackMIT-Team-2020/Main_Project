@@ -1,5 +1,11 @@
+function getQueryString(field, url) {
+    const href = url ? url : window.location.href;
+    const reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+    const string = reg.exec(href);
+    return string ? string[1] : null;
+};
 $(document).ready(function () {
-    id = "b445a492b669686ddaf5a1e7eba70017f6d682cf";
+    id = getQueryString('id');
     axios.get('/getnote/review_data/' + id).then(function (response) {
         console.log(response.data);
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -29,6 +35,7 @@ $(document).ready(function () {
                 }
             }
         });
+        console.log(myChart)
     });
 
 })
