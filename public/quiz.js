@@ -38,6 +38,7 @@ $(document).ready(function () {
         $("#submit").click(function () {
           var totalCor = 0
           for (var i = 0; i < correct.length; i++) {
+            console.log($("#" + i).val())
             if (correct[i] == $("#" + i).val()) {
               $('#' + i).attr('style', "background-color: #BCAC9B");
               totalCor++;
