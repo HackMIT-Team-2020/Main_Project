@@ -26,8 +26,8 @@ $(document).ready(function () {
                 console.log(response.data.stroke_data)
                 $("#title").text(response.data.title);
                 output = response.data.stroke_data;
-								output.width = $(document).width() * 0.8
-								output.height= $(document).height() * 0.8
+                output.width = $(document).width() * 0.8
+                output.height = $(document).height() * 0.8
                 output['element'] = '#sketchpad';
                 sketchpad = new Sketchpad(output);
 
@@ -91,6 +91,8 @@ $(document).ready(function () {
         $("#verify").show();
         $("#vinput").hide();
         $("#vsave").hide();
+        $("#vclose").hide();
+
 
         saveNotes(function (response) {
             console.log(response)
@@ -100,6 +102,7 @@ $(document).ready(function () {
                 $("#vinput").show();
                 $("#vinput").val(response.data);
                 $("#vsave").show();
+                $("#vclose").show();
 
                 $("#vsave").click(function () {
                     $("#verify").hide();
@@ -109,6 +112,9 @@ $(document).ready(function () {
                         .then(function (response) {
                             console.log(response.data)
                         })
+                })
+                $("#vclose").click(function () {
+                    $("#verify").hide();
                 })
             })
         })
