@@ -3,6 +3,10 @@ body {
   flex-direction: row;
   overflow: auto;
 }
+
+#schedule  a { color: var(--navy) };
+.card-title { color: var(--navy) };
+
 #schedule{
   overflow-y:auto
 }
