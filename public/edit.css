@@ -93,7 +93,7 @@ aside #butn-container {
 .colors {
   display: flex;
   flex-direction: column;
-  padding: 15px 32px;
+  padding: 8px 32px;
 }
 
 span {
@@ -103,9 +103,8 @@ span {
   -webkit-appearance: none;
   border: 10px solid var(--navy);
   background-color: var(--navy);
-  display: inline-block;
+  transition: .3s ease-in-out;
 }
-
 span img {
   width: 50px !important;
   position: absolute !important;
@@ -130,7 +129,7 @@ input[type="color"]::-webkit-color-swatch {
   position: absolute;
   top: 25%;
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
   display: flex;
   height: 500px;
   justify-content: center;
@@ -163,7 +162,7 @@ input[type="color"]::-webkit-color-swatch {
   border: none;
   cursor: pointer;
   color: black;
-  padding: 15px 32px;
+  padding: 8px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
