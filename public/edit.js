@@ -35,7 +35,7 @@ $(document).ready(function () {
             })
     }
     else{
-      localStorage.setItem('id', null)
+      localStorage.setItem('id', '')
     }
 
     // $('#sketchpad').addEventListener('touchmove', function(event){
