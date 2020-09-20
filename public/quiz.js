@@ -10,9 +10,24 @@ $(document).ready(function () {
     localStorage.setItem('review_id', getQueryString('id'))
     axios.get('/getnote_text/' + localStorage.getItem('review_id'))
         .then(function (response) {
-            $("#question").text(response.data)
+            let isblank = response.data.startsWith("[")
+            for(piece of toQuiz(response.data)){
+              if(isblank){
+                $("#question").append('<input>')
+              }
+              else{
+                $("#question").append('<p>'+piece+'<p/>')
+              }
+              console.log("PIECE "+piece)
+              isblank = !isblank
+            }
+            console.log(response)
     })
   }
 
     //refer to the value inside a input box by $("#id").val()
 });
+
+function toQuiz(input){
+  return input.split(/[\[\]]/)
+}
