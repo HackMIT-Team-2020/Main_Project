@@ -30,11 +30,26 @@ $(document).ready(function () {
         $("#question").append(monster_tag)
         console.log(response)
 
+        $("#submit").click(function () {
+          var totalCor = 0
+          for (var i = 0; i < correct.length; i++) {
+            if (correct[i] === $("#" + i).val()) {
+              totalCor++;
+            }
+          }
+          scoree = totalCor / correct.length;
+          console.log(scoree);
+          axios.post('/quiz/', {
+              id: getQueryString('id'),
+              score: scoree
+            })
+            .then(function (response) {
+              console.log(response.data)
+            })
+        })
+
       })
   }
-  $("#submit").click(function () {
-      window.location.href = "/edit.html";
-  });
 
   //refer to the value inside a input box by $("#id").val()
 });
