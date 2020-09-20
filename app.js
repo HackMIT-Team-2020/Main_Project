@@ -170,7 +170,7 @@ function saveImage(id, imageData){
 
 app.post('/quiz', function (req, res) {
   required = [req.body.id, req.body.score]
-  console.(req.body)
+  console.log(req.body)
   data = db.get('notes').find({id:req.body.id}).value()
   if(data){
     data.review_times.push(Date.now())
