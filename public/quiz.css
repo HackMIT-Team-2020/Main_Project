@@ -52,7 +52,7 @@ input[type=text]{
   border-radius: 16px;
   /* height: 30%; */
   display: inline;
-  font-size: 3em;
+  font-size: 1em;
   color: var(--navy);
   /* padding: 5%; */
 }
