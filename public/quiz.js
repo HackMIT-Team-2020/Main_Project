@@ -11,20 +11,20 @@ $(document).ready(function () {
     axios.get('/getnote_text/' + localStorage.getItem('review_id'))
         .then(function (response) {
             let isblank = response.data.startsWith("[")
-            console.log(isblank)
+            monster_tag = ''
             for(piece of toQuiz(response.data)){
               if(isblank){
                 if(piece.length>0)
-                $("#question").append('<input type="text" value="'+piece+'"></input>')
+                  monster_tag+='<input type="text" value="'+piece+'"></input>'
               }
               else{
-                if(piece.length>0){
-                  $("#question").append('<h3>'+piece+'<h3/>')
-                  console.log("PIECE "+piece)
-                }
+                if(piece.length>0)
+                  monster_tag+=piece
             }
             isblank = !isblank
           }
+          monster_tag = '<h3>'+monster_tag+'</h3>'
+          $("#question").append(monster_tag)
           console.log(response)
 
     })
