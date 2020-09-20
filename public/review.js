@@ -6,7 +6,7 @@ $(window).on('pageshow', function () {
     title,
     time
   }) => `
-      <a href="${review_url}" class="list-group-item"  style="text-decoration:none; color: black;">
+      <a href="${review_url}" class="list-group-item">
         <h2 class="list-group-item-text">${title}</h2>
         <p>${time}</p>
       </a>
