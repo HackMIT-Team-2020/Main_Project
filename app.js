@@ -29,11 +29,18 @@ const db = low(adapter)
 
 db.defaults({ notes: []}).write()
 
-
-
 // API Calls
 app.get('/getnotes', function (req, res) {
   res.send(db.get('notes'));
+})
+
+app.get('/getnote/review_data/:id', function (req, res) {
+  result = db.get('notes').find({id:req.params.id}).value()
+  res.send({times:result.review_times, scores: result.review_scores});
+})
+
+app.get('/getnote/:id', function (req, res) {
+  res.send(db.get('notes').find({id:req.params.id}).value());
 })
 
 app.get('/getnote/:id', function (req, res) {

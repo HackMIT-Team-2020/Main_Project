@@ -1,7 +1,10 @@
 body {
   display: flex;
   flex-direction: row;
-  overflow: hidden;
+  overflow: auto;
+}
+#schedule{
+  overflow-y:auto
 }
 main {
   width: 90%;
