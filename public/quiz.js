@@ -34,7 +34,10 @@ $(document).ready(function () {
           var totalCor = 0
           for (var i = 0; i < correct.length; i++) {
             if (correct[i] === $("#" + i).val()) {
+              $('#' + i).attr('style', "background-color: #BCAC9B");
               totalCor++;
+            } else {
+              $('#' + i).attr('style', "background-color: #C17C74");
             }
           }
           scoree = totalCor / correct.length;
@@ -44,9 +47,12 @@ $(document).ready(function () {
             window.location.href = "/notes.html";
           })
           $("#submit").hide();
-          data = {id: getQueryString('id'), score: scoree}
-          axios.post('/quiz', data).then((req)=>{
-              console.log(req.data)
+          data = {
+            id: getQueryString('id'),
+            score: scoree
+          }
+          axios.post('/quiz', data).then((req) => {
+            console.log(req.data)
           })
 
         })
