@@ -75,11 +75,11 @@ app.get('/review_schedule', function (req, res) {
   output = []
   for(note of db.get('notes')){
     if(!(note.text && note.time_saved && note.review_times && note.review_scores)){
-      console.log(note.title+" Doesn't have required quiz params")
+      // console.log(note.title+" Doesn't have required quiz params")
     }
     else{
       const review_time = getNextReview(note)
-      console.log(note.title + '\t' + review_time)
+      // console.log(note.title + '\t' + review_time)
       output.push({
         title:note.title,
         id: note.id,
@@ -97,19 +97,23 @@ function getNextReview(note){
   const len = note.review_times.length
   let days_reviewed = 0
   let time_diff = 0
-  if(len!=0){
+  if(len==0){
+    return note.time_saved + 86400 * 1000
+  }
+  else{
     days_reviewed = (note.review_times[len-1]-note.review_times[0])/(86400 * 1000)
     time_diff = (note.review_times[len-1]-note.review_times[0])
+
   }
   console.log(days_reviewed)
   if(days_reviewed <= 1){
-    return note.time_saved + 86400 * 1000
+    return note.review_times[len-1] + 86400 * 1000
   }
   else if(days_reviewed <= 3){
-    return note.time_saved + 86400 * 2 * 1000
+    return note.review_times[len-1] + 86400 * 2 * 1000
   }
   else if(days_reviewed > 3){
-    return note.time_saved + time_diff * note.review_scores(len-1)
+    return note.review_times[len-1] + time_diff - (0.5-note.review_scores(len-1))*86400*2*1000
   }
 
 }
@@ -124,6 +128,22 @@ app.post('/correctParse/:id', function (req, res) {
     console.log(req.params.id)
     res.sendStatus(404)
   }
+})
+
+app.post('/quiz', function (req, res) {
+  required = [req.body.id, req.body.score]
+  data = db.get('notes').find({id:req.body.id}).value()
+  if(data){
+    data.review_times.push(Date.now())
+    data.review_scores.push(req.body.score)
+    db.get('notes').find({id:req.body.id}).assign(data).write()
+    console.log(data.review_times)
+    console.log(data.review_scores)
+    console.log('\n'+getNextReview(data))
+    res.send(data+'\n'+getNextReview(data))
+  }
+  else
+    res.sendStatus(404);
 })
 
 app.post('/addnote', function (req, res) {
@@ -168,19 +188,7 @@ function saveImage(id, imageData){
   });
 }
 
-app.post('/quiz', function (req, res) {
-  required = [req.body.id, req.body.score]
-  console.log(req.body)
-  data = db.get('notes').find({id:req.body.id}).value()
-  if(data){
-    data.review_times.push(Date.now())
-    data.review_scores.push(req.body.score)
-    db.get('notes').find({id:req.body.id}).assign(data).write()
-    res.send(getNextReview(data))
-  }
-  else
-    res.sendStatus(404);
-})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -29,7 +29,6 @@ $(document).ready(function () {
         }
         monster_tag = '<h3>' + monster_tag + '</h3>'
         $("#question").append(monster_tag)
-        console.log(response)
 
         $("#submit").click(function () {
           var totalCor = 0
@@ -45,14 +44,11 @@ $(document).ready(function () {
             window.location.href = "/notes.html";
           })
           $("#submit").hide();
-          console.log(scoree);
-          axios.post('/quiz/', {
-              id: getQueryString('id'),
-              score: scoree
-            })
-            .then(function (response) {
-              console.log(response.data)
-            })
+          data = {id: getQueryString('id'), score: scoree}
+          axios.post('/quiz', data).then((req)=>{
+              console.log(req.data)
+          })
+
         })
 
       })
