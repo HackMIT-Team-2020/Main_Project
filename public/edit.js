@@ -55,27 +55,19 @@ $(document).ready(function () {
     $("#ctcancel").hide();
     $("#verify").hide();
 
-    $("#undo").click(function () {
+    $("#undo").on('click tap',function () {
         sketchpad.undo();
     });
 
-    $("#undo").onTap(function () {
-        sketchpad.undo();
-    });
-
-    $("#redo").click(function () {
+    $("#redo").on('click tap',function () {
         sketchpad.redo();
-    });
-
-    $("#redo").onTap(function () {
-        sketchpad.undo();
     });
 
     $("#color_picker").change(function () {
         sketchpad.color = $(this).val();
     });
 
-    $("#changetitle").click(function () {
+    $("#changetitle").on('click tap',function () {
         $("#ctinput").show();
         $("#ctsubmit").show();
         $("#ctcancel").show();
@@ -84,7 +76,7 @@ $(document).ready(function () {
     });
 
     //change title
-    $("#ctsubmit").click(function () {
+    $("#ctsubmit").on('click tap',function () {
         $("#ctinput").hide();
         $("#ctsubmit").hide();
         $("#ctcancel").hide();
