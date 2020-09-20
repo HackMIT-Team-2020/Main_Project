@@ -5,6 +5,7 @@ function getQueryString(field, url) {
   return string ? string[1] : null;
 };
 $(document).ready(function () {
+  $("#score").hide();
   if (getQueryString('id') != null) {
     console.log("CALLED")
     localStorage.setItem('review_id', getQueryString('id'))
@@ -38,6 +39,12 @@ $(document).ready(function () {
             }
           }
           scoree = totalCor / correct.length;
+          $("#score").prepend("Your score is " + scoree + ".");
+          $("#score").show();
+          $("#ok").click(function () {
+            window.location.href = "/notes.html";
+          })
+          $("#submit").hide();
           console.log(scoree);
           axios.post('/quiz/', {
               id: getQueryString('id'),
