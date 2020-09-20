@@ -50,8 +50,9 @@ h1{
 }
 input[type=text]{
   border-radius: 16px;
-  height: 30%;
+  /* height: 30%; */
+  display: inline;
   font-size: 3em;
   color: var(--navy);
-  padding: 5%;
+  /* padding: 5%; */
 }
