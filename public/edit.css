@@ -127,13 +127,17 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 #verify {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%); 
   display: flex;
-      height: 500px;
-      justify-content: center;
-      align-items: center;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
 }
 #verify div img{
-  width: 20px; 
+  width: 20px;
 }
 .loader {
   border: 16px solid #f3f3f3;
