@@ -15,7 +15,7 @@ $("#color_front").click(function (event) {
 $(document).ready(function () {
     var sketchpad = new Sketchpad({
         element: '#sketchpad',
-        width: $(document).width() * 0.7,
+        width: $(document).width() * 0.8,
         height: $(document).height() * 0.8,
     });
 
@@ -26,6 +26,8 @@ $(document).ready(function () {
                 console.log(response.data.stroke_data)
                 $("#title").text(response.data.title);
                 output = response.data.stroke_data;
+								output.width = $(document).width() * 0.8
+								output.height= $(document).height() * 0.8
                 output['element'] = '#sketchpad';
                 sketchpad = new Sketchpad(output);
 
