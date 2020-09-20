@@ -23,3 +23,4 @@ Spaced repetition can be implemented in many ways and we had to figure out a mod
 We've built something that each of us as individuals would find useful and use and hope that other people find the project as useful as we do!
 
 ## What's next?
+We see a large scope for expansion, from integration with google calendars to a mobile version of Notention.
