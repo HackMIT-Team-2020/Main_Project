@@ -4,6 +4,7 @@
 
 }
 body{
+  display: flex;
 background-color: var(--tan);
 }
 a {
@@ -14,3 +15,26 @@ a {
   background-color: var(--navy);
 }
 h1{font-size: 5em;}
+main {
+  width: 90%;
+}
+
+
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 10%;
+  background-color: var(--navy);
+}
+aside img{
+  width: 80px;
+  transition: .3s ease-in-out;
+  margin-bottom: 30px;
+}
+
+aside img:hover{
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
