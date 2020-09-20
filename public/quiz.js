@@ -7,7 +7,6 @@ function getQueryString(field, url) {
 $(document).ready(function () {
   $("#score").hide();
   if (getQueryString('id') != null) {
-    console.log("CALLED")
     localStorage.setItem('review_id', getQueryString('id'))
     correct = []
     corid = 0
@@ -16,6 +15,8 @@ $(document).ready(function () {
         let isblank = response.data.startsWith("[")
         monster_tag = ''
         for (piece of toQuiz(response.data)) {
+          console.log(piece)
+          // piece = piece.trim()
           if (isblank) {
             if (piece.length > 0) {
               monster_tag += '<input type="text" id="' + corid + '"></input>'
