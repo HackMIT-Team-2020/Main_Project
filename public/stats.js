@@ -7,7 +7,12 @@ function getQueryString(field, url) {
 $(document).ready(function () {
     id = getQueryString('id');
     axios.get('/getnote/review_data/' + id).then(function (response) {
-        console.log(response.data);
+        if(response.data.times.length==0){
+          $('#error').text("Please review the content first")
+          return
+        }
+
+
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
