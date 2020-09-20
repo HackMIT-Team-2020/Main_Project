@@ -6,12 +6,14 @@ $(window).on('pageshow', function () {
     title,
     time
   }) => `
-      <a href="${review_url}" class="list-group-item">
+    <div class="list-group-item">
+      <a href="${review_url}"  >
         <h2 class="list-group-item-text">${title}</h2>
         <p>${time}</p>
-        <a href="${stats_url}" class="btn btn-navy" role="button">View Stats</a>
       </a>
+      <a href="${stats_url}" class="btn btn-navy" role="button">View Stats</a>
 
+    </div>
     `;
   axios.get('/review_schedule?time=' + Date.now()).then(function (response) {
     for (var i = 0; i < response.data.length; i++) {

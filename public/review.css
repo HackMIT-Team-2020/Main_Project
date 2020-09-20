@@ -1,7 +1,16 @@
 #schedule .list-group-item {
   color: var(--navy);
+  background-color: var(--tan);
+
+}
+body{
+background-color: var(--tan);
+}
+a {
+  color: var(--navy);
 }
 .btn-navy{
   color: var(--tan);
   background-color: var(--navy);
 }
+h1{font-size: 5em;}
