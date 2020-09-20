@@ -134,6 +134,7 @@ $(document).ready(function () {
     })
 
     function saveNotes(callback) {
+        console.log(localStorage.getItem('id'))
         axios.post('/addnote', {
                 data: {
                     title: $("#title").text(),
@@ -145,6 +146,7 @@ $(document).ready(function () {
             .then(function (response) {
                 if (!localStorage.getItem('id')) {
                     localStorage.setItem('id', response.data)
+                    console.log(localStorage.getItem('id'))
                 }
                 new Noty({
                     text: 'Saved Successfuly!',
