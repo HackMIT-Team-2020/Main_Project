@@ -35,6 +35,18 @@ $(document).ready(function () {
             })
     }
 
+    $('#sketchpad').addEventListener('touchmove', function(event){
+        for(var i = 0; i < event.touches.length; i++){
+             if(event.touches[i].touchType === "stylus"){
+               continue;
+             }
+             else{
+               event.preventDefault()
+             }
+        }
+    });
+
+
     $("#ctinput").hide();
     $("#ctsubmit").hide();
     $("#ctcancel").hide();
