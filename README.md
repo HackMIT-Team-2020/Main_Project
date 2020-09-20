@@ -20,6 +20,6 @@ With our vision of making studying simpler for students in mind, we designed a w
 Spaced repetition can be implemented in many ways and we had to figure out a model that would work for as many people as possible while still being customizable for individual review scores. 
 
 ## Accomplishments we're proud of
-
+We've built something that each of us as individuals would find useful and use and hope that other people find the project as useful as we do!
 
 ## What's next?
