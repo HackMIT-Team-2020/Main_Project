@@ -3,6 +3,10 @@
   background-color: var(--tan);
 
 }
+
+h1 {
+  color: var(--navy);
+}
 body{
   display: flex;
 background-color: var(--tan);
