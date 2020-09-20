@@ -59,8 +59,16 @@ $(document).ready(function () {
         sketchpad.undo();
     });
 
+    $("#undo").onTap(function () {
+        sketchpad.undo();
+    });
+
     $("#redo").click(function () {
         sketchpad.redo();
+    });
+
+    $("#redo").onTap(function () {
+        sketchpad.undo();
     });
 
     $("#color_picker").change(function () {
