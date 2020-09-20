@@ -34,6 +34,9 @@ $(document).ready(function () {
 
             })
     }
+    else{
+      localStorage.setItem('id', null)
+    }
 
     // $('#sketchpad').addEventListener('touchmove', function(event){
     //     for(var i = 0; i < event.touches.length; i++){
