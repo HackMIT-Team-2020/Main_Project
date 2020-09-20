@@ -32,6 +32,9 @@ $(document).ready(function () {
 
       })
   }
+  $("#submit").click(function () {
+      window.location.href = "/edit.html";
+  });
 
   //refer to the value inside a input box by $("#id").val()
 });
