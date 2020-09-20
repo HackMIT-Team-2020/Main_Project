@@ -5,7 +5,7 @@ $(window).on('pageshow',function () {
         <h2 class="list-group-item-text">${title}</h2>
         <p>${time}</p>
       </a>
-      <a href="${stats_url}" class="btn btn-info" role="button">View Stats</a>
+      <a href="${stats_url}" class="btn btn-navy" role="button">View Stats</a>
 
     `;
     axios.get('/review_schedule?time='+Date.now()).then(function (response) {

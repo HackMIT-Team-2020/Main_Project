@@ -1,0 +1,7 @@
+#schedule a {
+  color: var(--navy)
+};
+.btn-navy{
+  color: var(--tan);
+  background-color: var(--navy);
+};
