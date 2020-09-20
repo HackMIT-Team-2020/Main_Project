@@ -1,7 +1,7 @@
-#schedule a {
-  color: var(--navy)
-};
+#schedule .list-group-item {
+  color: var(--navy);
+}
 .btn-navy{
   color: var(--tan);
   background-color: var(--navy);
-};
+}
