@@ -16,6 +16,10 @@ $(document).ready(function () {
         monster_tag = ''
         for (piece of toQuiz(response.data)) {
           console.log(piece)
+          if(piece.startsWith("\n")){
+            monster_tag += '<br>'
+            piece = piece.trim()
+          }
           // piece = piece.trim()
           if (isblank) {
             if (piece.length > 0) {
