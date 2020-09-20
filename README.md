@@ -17,7 +17,9 @@ The user can create handwritten notes which can be edited later. These notes are
 With our vision of making studying simpler for students in mind, we designed a wireframe mockup of Notention’s flow and its look and feel in Adobe XD; we created our logo in Adobe Illustrator. For the backend, we used Node.js with Express, the Google Vision API, and lowdb; in the frontend, we used HTML, CSS, JQuery with some Bootstrap, the [Sketchpad](https://github.com/yiom/sketchpad) library, and a [JQuery Modal](https://jquerymodal.com/) library. But, most importantly, we built Notention with lots of love.
 
 ## Challenges we faced
+Spaced repetition can be implemented in many ways and we had to figure out a model that would work for as many people as possible while still being customizable for individual review scores. 
 
 ## Accomplishments we're proud of
+
 
 ## What's next?
