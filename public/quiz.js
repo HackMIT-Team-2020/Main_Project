@@ -38,7 +38,7 @@ $(document).ready(function () {
         $("#submit").click(function () {
           var totalCor = 0
           for (var i = 0; i < correct.length; i++) {
-            if (correct[i] === $("#" + i).val()) {
+            if (correct[i] == $("#" + i).val()) {
               $('#' + i).attr('style', "background-color: #BCAC9B");
               totalCor++;
             } else {
@@ -47,7 +47,7 @@ $(document).ready(function () {
           }
           scoree = totalCor / correct.length;
           rounded = Math.round(scoree * 10000) / 100
-          $("#score").prepend("Your score is " + rounded + "%.");
+          $("#score").prepend("Your score is " + rounded + "%");
           $("#score").show();
           $("#ok").click(function () {
             window.location.href = "/notes.html";
