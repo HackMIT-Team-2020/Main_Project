@@ -24,6 +24,7 @@ $(document).ready(function () {
           if (isblank) {
             if (piece.length > 0) {
               monster_tag += '<input type="text" id="' + corid + '"></input>'
+              corid++
               correct.push(piece);
             }
           } else {
